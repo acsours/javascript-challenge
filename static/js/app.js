@@ -36,10 +36,15 @@ for (var i=0; i<tableData.length; i++) {
     current_data=tableData[i]
 
     value_list = Object.values(current_data);
-    for (var j=0; j<value_list.length; j++) {
-        new_row.append('td').text(value_list[j]);
+    // console.log("value_list: ");
+    // console.log(value_list)
+    if (value_list[0]==="1/1/2010") {
+        for (var j=0; j<value_list.length; j++) {
+            new_row.append('td').text(value_list[j]);
+        };
     };
 };
+
 
 // for (var i=0; i<tableData.length; i++) {
 //     var new_row=tbody.append('tr');
@@ -50,14 +55,7 @@ for (var i=0; i<tableData.length; i++) {
 //     // if the value at date matches the string, push to filtered data, 
 //     // then show only filtered data
 
-// for each object in tableData
-// for (var i=0; i<tableData.length; i++) {
-//     var new_row=tbody.append('tr');
-//     current_data=tableData[i]
-//     // check if tableData[i]["date"] === "1/1/2011"
-//     if (current_data["date"] ==="1/1/2011") {
-//         console.log(current_data)
-//     };
+
 // };
     // if yes, then append the Object.values.tableData[i]
 //     value_list = Object.values(current_data);
@@ -68,14 +66,6 @@ for (var i=0; i<tableData.length; i++) {
 //     };
 // };
 
-
-var filtered_data=tableData.filter(sighting=>sighting["date"]=="1/1/2010");
-console.log(filtered_data);
-//     value_list = Object.values(current_data);
-//     for (var j=0; j<value_list.length; j++) {
-//         new_row.append('td').text(value_list[j]);
-//     };
-// };
 
 // value_list = Object.values(tableData)
 // filtered_data=[]
