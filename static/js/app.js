@@ -27,6 +27,9 @@ var tbody = d3.select("tbody");
 // newRow.append('td').text('2 minutes');
 // newRow.append('td').text('4 bright green circles high in the sky going in circles then one bright green light at my front door.');
 
+
+// this shows the entire table as is --> we will use this to 
+// fill a table based on data that has been filtered
 for (var i=0; i<tableData.length; i++) {
     var new_row=tbody.append('tr');
 
@@ -37,3 +40,51 @@ for (var i=0; i<tableData.length; i++) {
         new_row.append('td').text(value_list[j]);
     };
 };
+
+// for (var i=0; i<tableData.length; i++) {
+//     var new_row=tbody.append('tr');
+
+//     current_data=tableData[i]
+//     filtered_data=[]
+
+//     // if the value at date matches the string, push to filtered data, 
+//     // then show only filtered data
+
+// for each object in tableData
+// for (var i=0; i<tableData.length; i++) {
+//     var new_row=tbody.append('tr');
+//     current_data=tableData[i]
+//     // check if tableData[i]["date"] === "1/1/2011"
+//     if (current_data["date"] ==="1/1/2011") {
+//         console.log(current_data)
+//     };
+// };
+    // if yes, then append the Object.values.tableData[i]
+//     value_list = Object.values(current_data);
+
+
+//     for (var j=0; j<value_list.length; j++) {
+//         new_row.append('td').text(value_list[j]);
+//     };
+// };
+
+
+var filtered_data=tableData.filter(sighting=>sighting["date"]=="1/1/2010");
+console.log(filtered_data);
+//     value_list = Object.values(current_data);
+//     for (var j=0; j<value_list.length; j++) {
+//         new_row.append('td').text(value_list[j]);
+//     };
+// };
+
+// value_list = Object.values(tableData)
+// filtered_data=[]
+
+// tableData.forEach(sighting => {
+//     if (sighting["date"]==="1/1/2010") {
+//         filtered_data.push(sighting)
+//     };
+// });
+
+// console.log(filtered_data);
+
