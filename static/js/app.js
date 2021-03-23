@@ -18,20 +18,13 @@ var tableData = data;
 // step 2: use d3 to append one table row for each UFO sigting
 var tbody = d3.select("tbody");
 
-// var newRow=tbody.append('tr');
-// newRow.append('td').text('1/1/2010');
-// newRow.append('td').text('benton');
-// newRow.append('td').text('ar');
-// newRow.append('td').text('us');
-// newRow.append('td').text('circle');
-// newRow.append('td').text('2 minutes');
-// newRow.append('td').text('4 bright green circles high in the sky going in circles then one bright green light at my front door.');
 
 // get reference to the button on the page
 var button = d3.select("#filter-btn")
 
 // get reference to the input element
-var inputField = d3.select(".form-control")
+// var inputField = d3.select(".form-control")
+var form = d3.select("form")
 
 
 // testing button
@@ -44,42 +37,104 @@ function handleClick() {
   }
   
   // We can use the `on` function in d3 to attach an event to the handler function
-button.on("click", handleClick);
+button.on("click", handleChange);
+form.on("submit", handleChange);
 
-// function handleInput() {
-//     var inputText=d3.event.target.value;
-//     console.log(inputText);
-// };
 
 // inputField.on("change", function() {
 //     var inputText=d3.event.target.value;
 //     console.log(inputText);
 // });
 
-
-
 function handleChange(event) {
-    var inputText=d3.event.target.value;
-    console.log(inputText);    
-    
-    for (var i=0; i<tableData.length; i++) {
+    // prevent page from refreshing
+    d3.event.preventDefault();  
+    d3.selectAll('td').remove();
+    // this was trying to remove old data 
+    // old_data = d3.selectAll('td');
+    // console.log(old_data);
+
+    // select form as input element
+    var inputElement=d3.select(".form-control");
+
+    // get value property from the form 
+    var inputText = inputElement.property("value");
+    // console.log(inputText);    
+ 
+    filteredData=tableData.filter(sighting=>sighting.datetime==inputText);
+    // console.log(filteredData);
+
+    // loop through filteredData and append a new row 
+       for (var i=0; i<filteredData.length; i++) {
         var new_row=tbody.append('tr');
 
-        current_data=tableData[i]
+        current_data=filteredData[i]
 
         value_list = Object.values(current_data);
-        // console.log("value_list: ");
-        // console.log(value_list)
-        if (value_list[0]===inputText) {
             for (var j=0; j<value_list.length; j++) {
-                new_row.append('td').text(value_list[j]);
-            };
+                    new_row.append('td').text(value_list[j]);
+                };
         };
-    };
-};
+    };  
+
+//     for (var i=0; i<tableData.length; i++) {
+//         var new_row=tbody.append('tr');
+
+//         current_data=tableData[i]
+
+//         value_list = Object.values(current_data);
+//         // console.log("value_list: ");
+//         // console.log(value_list)
+        
+//         // if the new row's date matches the input date, append a cell with that value
+//         if (value_list[0]===inputText) {
+//             for (var j=0; j<value_list.length; j++) {
+//                 new_row.append('td').text(value_list[j]);
+//             };
+//         };
+//     };
+// };
 
 
-inputField.on("change", handleChange)
+
+
+// ***********************************************
+// this way uses a long version to filter data...
+
+// function handleChange(event) {
+//     // prevent page from refreshing
+//     d3.event.preventDefault();  
+    
+//     // select form as input element
+//     var inputElement=d3.select(".form-control");
+
+//     // get value property from the form 
+//     var inputText = inputElement.property("value");
+//     console.log(inputText);    
+    
+//     // loop through tableData and append a new row 
+//     for (var i=0; i<tableData.length; i++) {
+//         var new_row=tbody.append('tr');
+
+//         current_data=tableData[i]
+
+//         value_list = Object.values(current_data);
+//         // console.log("value_list: ");
+//         // console.log(value_list)
+        
+//         // if the new row's date matches the input date, append a cell with that value
+//         if (value_list[0]===inputText) {
+//             for (var j=0; j<value_list.length; j++) {
+//                 new_row.append('td').text(value_list[j]);
+//             };
+//         };
+//     };
+// };
+
+// ***********************************************
+
+// inputField.on("change", handleChange)
+// button.on("click", handleChange)
 // // ***********************************
   // this shows the entire table as is --> we will use this to 
 // fill a table based on data that has been filtered
