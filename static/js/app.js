@@ -18,6 +18,22 @@ var tableData = data;
 // step 2: use d3 to append one table row for each UFO sigting
 var tbody = d3.select("tbody");
 
+// // ***********************************
+  // this shows the entire table as is --> we will use this to populate first
+// // If you want to account for disorganized data, do it this way:
+var header_list=['datetime', 'city', 'state', 'country', 'shape', 'durationMinutes', 'comments']
+
+
+for (var i=0; i<tableData.length; i++) {
+    var new_row=tbody.append('tr');
+
+    current_data=tableData[i]
+    for (var j=0; j<header_list.length; j++) {
+            new_row.append('td').text(current_data[header_list[j]]);
+        // console.log(current_data[header_list[j]])
+    };
+};
+// // ***********************************
 
 // get reference to the button on the page
 var button = d3.select("#filter-btn")
@@ -77,26 +93,6 @@ function handleChange(event) {
         };
     };  
 
-//     for (var i=0; i<tableData.length; i++) {
-//         var new_row=tbody.append('tr');
-
-//         current_data=tableData[i]
-
-//         value_list = Object.values(current_data);
-//         // console.log("value_list: ");
-//         // console.log(value_list)
-        
-//         // if the new row's date matches the input date, append a cell with that value
-//         if (value_list[0]===inputText) {
-//             for (var j=0; j<value_list.length; j++) {
-//                 new_row.append('td').text(value_list[j]);
-//             };
-//         };
-//     };
-// };
-
-
-
 
 // ***********************************************
 // this way uses a long version to filter data...
@@ -153,42 +149,8 @@ function handleChange(event) {
 //     };
 // };
 // // ***********************************
-// // ***********************************
-// // If you want to account for disorganized data, do it this way instead:
-// var header_list=['datetime', 'city', 'state', 'country', 'shape', 'durationMinutes', 'comments']
 
 
-// for (var i=0; i<tableData.length; i++) {
-//     var new_row=tbody.append('tr');
-
-//     current_data=tableData[i]
-//     for (var j=0; j<header_list.length; j++) {
-//             new_row.append('td').text(current_data[header_list[j]]);
-//         // console.log(current_data[header_list[j]])
-//     };
-// };
-// // ***********************************
-
-
-// for (var i=0; i<tableData.length; i++) {
-//     var new_row=tbody.append('tr');
-
-//     current_data=tableData[i]
-//     filtered_data=[]
-
-//     // if the value at date matches the string, push to filtered data, 
-//     // then show only filtered data
-
-
-// };
-    // if yes, then append the Object.values.tableData[i]
-//     value_list = Object.values(current_data);
-
-
-//     for (var j=0; j<value_list.length; j++) {
-//         new_row.append('td').text(value_list[j]);
-//     };
-// };
 
 
 // value_list = Object.values(tableData)
