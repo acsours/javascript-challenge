@@ -20,7 +20,7 @@ var tbody = d3.select("tbody");
 
 // // ***********************************
   // this shows the entire table as is --> we will use this to populate first
-// // If you want to account for disorganized data, do it this way:
+// If you want to account for disorganized data, do it this way:
 var header_list=['datetime', 'city', 'state', 'country', 'shape', 'durationMinutes', 'comments']
 
 
@@ -33,7 +33,7 @@ for (var i=0; i<tableData.length; i++) {
         // console.log(current_data[header_list[j]])
     };
 };
-// // ***********************************
+// ***********************************
 
 // get reference to the button on the page
 var button = d3.select("#filter-btn")
@@ -45,12 +45,12 @@ var form = d3.select("form")
 
 // testing button
 
-function handleClick() {
-    console.log("A button was clicked!");
+// function handleClick() {
+//     console.log("A button was clicked!");
   
-    // We can use d3 to see the object that dispatched the event
-    console.log(d3.event.target);
-  }
+//     // We can use d3 to see the object that dispatched the event
+//     console.log(d3.event.target);
+//   }
   
   // We can use the `on` function in d3 to attach an event to the handler function
 button.on("click", handleChange);
@@ -62,6 +62,43 @@ form.on("submit", handleChange);
 //     console.log(inputText);
 // });
 
+// ****************************
+// This is the original, date only version that works great. 
+
+
+// function handleChange(event) {
+//     // prevent page from refreshing
+//     d3.event.preventDefault();  
+//     d3.selectAll('td').remove();
+//     // this was trying to remove old data 
+//     // old_data = d3.selectAll('td');
+//     // console.log(old_data);
+
+//     // select form as input element
+//     var inputElement=d3.select(".form-control");
+
+//     // get value property from the form 
+//     var inputText = inputElement.property("value");
+//     // console.log(inputText);    
+ 
+//     filteredData=tableData.filter(sighting=>sighting.datetime==inputText);
+//     // console.log(filteredData);
+
+//     // loop through filteredData and append a new row 
+//        for (var i=0; i<filteredData.length; i++) {
+//         var new_row=tbody.append('tr');
+
+//         current_data=filteredData[i]
+
+//         value_list = Object.values(current_data);
+//             for (var j=0; j<value_list.length; j++) {
+//                     new_row.append('td').text(value_list[j]);
+//                 };
+//         };
+//     };  
+// ***********************************************
+
+// This is trying with multiple filter ids
 function handleChange(event) {
     // prevent page from refreshing
     d3.event.preventDefault();  
@@ -70,14 +107,18 @@ function handleChange(event) {
     // old_data = d3.selectAll('td');
     // console.log(old_data);
 
-    // select form as input element
-    var inputElement=d3.select(".form-control");
+    // select date form as input element
+    var input_date_element=d3.select("#datetime");
+    var input_city_element=d3.select("#city");
 
     // get value property from the form 
-    var inputText = inputElement.property("value");
-    // console.log(inputText);    
- 
-    filteredData=tableData.filter(sighting=>sighting.datetime==inputText);
+    var input_date_value = input_date_element.property("value");
+    var input_city_value = input_city_element.property("value");
+
+    // console.log(input_date_value);    
+    // console.log(input_city_value);    
+
+    filteredData=tableData.filter(sighting=>(sighting.datetime==input_date_value && sighting.city==input_city_value));
     // console.log(filteredData);
 
     // loop through filteredData and append a new row 
@@ -92,6 +133,9 @@ function handleChange(event) {
                 };
         };
     };  
+
+
+
 
 
 // ***********************************************
