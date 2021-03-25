@@ -122,16 +122,47 @@ function handleChange(event) {
     // old_data = d3.selectAll('td');
     // console.log(old_data);
 
+    // var input_date_element=d3.select("#datetime");
+
     // select any value from input
-    var inputText = inputField.property("value");
-    console.log(inputText);    
+    // var inputThing=d3.select(this).select("input");
+    // // grab the id attribute
+    // var inputID=inputThing.attr("id");
+    // var inputText = inputField.property("value");
+    // pull the id
+    // console.log(inputID);    
 
     // get value property from the form 
-    // var input_date_value = input_date_element.property("value");
-    // var input_city_value = input_city_element.property("value");
 
-    // console.log(input_date_value);    
-    // console.log(input_city_value);    
+    var input_date_value = d3.select("#datetime").property("value");
+    var input_city_value = d3.select("#city").property("value");
+
+    console.log(input_date_value);    
+    console.log(input_city_value);    
+
+    if (input_date_value){
+      filteredData=tableData.filter(sighting=>sighting["datetime"]==input_date_value)
+      // console.log("data by date");
+      // console.log(filteredData);
+      filteredData.forEach(sighting=> {
+        var new_row=tbody.append('tr');
+        value_list=Object.values(sighting)
+        value_list.forEach(data_point => {
+          new_row.append('td').text(data_point)
+        });
+      });
+    } else if (input_city_value){
+        filteredData=tableData.filter(sighting=>sighting["city"]==input_city_value)
+      // console.log("data by date");
+      // console.log(filteredData);
+        filteredData.forEach(sighting=> {
+          var new_row=tbody.append('tr');
+          value_list=Object.values(sighting)
+          value_list.forEach(data_point => {
+            new_row.append('td').text(data_point)
+          });
+        });
+    };
     // filteredData=tableData.filter(sighting=>sighting.datetime==inputText);
     // console.log(filteredData);
     // filteredData=tableData.filter(sighting=>(sighting.datetime==input_date_value && sighting.city==input_city_value));
