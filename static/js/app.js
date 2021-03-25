@@ -23,6 +23,8 @@ var tbody = d3.select("tbody");
 // If you want to account for disorganized data, do it this way:
 var header_list=['datetime', 'city', 'state', 'country', 'shape', 'durationMinutes', 'comments']
 
+// I can create header_list in a simpler way:
+// var variable_list=Object.keys(tableData[0]);
 
 for (var i=0; i<tableData.length; i++) {
     var new_row=tbody.append('tr');
@@ -35,12 +37,24 @@ for (var i=0; i<tableData.length; i++) {
 };
 // ***********************************
 
+// try this with forEach; 
+// tableData.forEach(function(sighting) {
+//   var new_row=tbody.append('tr');
+
+//     // current_data=tableData[i]
+//     sighting.forEach(function(item) {
+//         item.append('td').text(sighting[header_list]);
+//         // console.log(current_data[header_list[j]])
+//     };
+// });
+
 // get reference to the button on the page
 var button = d3.select("#filter-btn")
 
 // get reference to the input element
-// var inputField = d3.select(".form-control")
-var form = d3.select("form")
+var inputField = d3.selectAll(".form-control")
+console.log(inputField)
+// var form = d3.select("form")
 
 
 // testing button
@@ -54,7 +68,8 @@ var form = d3.select("form")
   
   // We can use the `on` function in d3 to attach an event to the handler function
 button.on("click", handleChange);
-form.on("submit", handleChange);
+inputField.on("change", handleChange);
+// form.on("submit", handleChange);
 
 
 // inputField.on("change", function() {
@@ -66,39 +81,6 @@ form.on("submit", handleChange);
 // This is the original, date only version that works great. 
 
 
-function handleChange(event) {
-    // prevent page from refreshing
-    d3.event.preventDefault();  
-    d3.selectAll('td').remove();
-    // this was trying to remove old data 
-    // old_data = d3.selectAll('td');
-    // console.log(old_data);
-
-    // select form as input element
-    var inputElement=d3.select(".form-control");
-
-    // get value property from the form 
-    var inputText = inputElement.property("value");
-    // console.log(inputText);    
- 
-    filteredData=tableData.filter(sighting=>sighting.datetime==inputText);
-    // console.log(filteredData);
-
-    // loop through filteredData and append a new row 
-       for (var i=0; i<filteredData.length; i++) {
-        var new_row=tbody.append('tr');
-
-        current_data=filteredData[i]
-
-        value_list = Object.values(current_data);
-            for (var j=0; j<value_list.length; j++) {
-                    new_row.append('td').text(value_list[j]);
-                };
-        };
-    };  
-// ***********************************************
-
-// // This is trying with multiple filter ids
 // function handleChange(event) {
 //     // prevent page from refreshing
 //     d3.event.preventDefault();  
@@ -107,18 +89,14 @@ function handleChange(event) {
 //     // old_data = d3.selectAll('td');
 //     // console.log(old_data);
 
-//     // select date form as input element
-//     var input_date_element=d3.select("#datetime");
-//     var input_city_element=d3.select("#city");
+//     // select form as input element
+//     // var inputElement=d3.select(".form-control");
 
 //     // get value property from the form 
-//     var input_date_value = input_date_element.property("value");
-//     var input_city_value = input_city_element.property("value");
-
-//     // console.log(input_date_value);    
-//     // console.log(input_city_value);    
-
-//     filteredData=tableData.filter(sighting=>(sighting.datetime==input_date_value && sighting.city==input_city_value));
+//     var inputText = inputField.property("value");
+//     // console.log(inputText);    
+ 
+//     filteredData=tableData.filter(sighting=>sighting.datetime==inputText);
 //     // console.log(filteredData);
 
 //     // loop through filteredData and append a new row 
@@ -133,6 +111,44 @@ function handleChange(event) {
 //                 };
 //         };
 //     };  
+// ***********************************************
+
+// This is trying with multiple filter ids
+function handleChange(event) {
+    // prevent page from refreshing
+    d3.event.preventDefault();  
+    d3.selectAll('td').remove();
+    // this was trying to remove old data 
+    // old_data = d3.selectAll('td');
+    // console.log(old_data);
+
+    // select any value from input
+    var inputText = inputField.property("value");
+    console.log(inputText);    
+
+    // get value property from the form 
+    // var input_date_value = input_date_element.property("value");
+    // var input_city_value = input_city_element.property("value");
+
+    // console.log(input_date_value);    
+    // console.log(input_city_value);    
+    // filteredData=tableData.filter(sighting=>sighting.datetime==inputText);
+    // console.log(filteredData);
+    // filteredData=tableData.filter(sighting=>(sighting.datetime==input_date_value && sighting.city==input_city_value));
+    // console.log(filteredData);
+
+    // loop through filteredData and append a new row 
+      //  for (var i=0; i<filteredData.length; i++) {
+      //   var new_row=tbody.append('tr');
+
+      //   current_data=filteredData[i]
+
+      //   value_list = Object.values(current_data);
+      //       for (var j=0; j<value_list.length; j++) {
+      //               new_row.append('td').text(value_list[j]);
+      //           };
+      //   };
+    };  
 
 
 
@@ -200,11 +216,23 @@ function handleChange(event) {
 // value_list = Object.values(tableData)
 // filtered_data=[]
 
-// tableData.forEach(sighting => {
-//     if (sighting["date"]==="1/1/2010") {
-//         filtered_data.push(sighting)
+// tableData.forEach(function(sighting) {
+//   var new_row=tbody.append('tr');
+
+//     current_data=tableData[i]
+//     for (var j=0; j<header_list.length; j++) {
+//             new_row.append('td').text(current_data[header_list[j]]);
+//         // console.log(current_data[header_list[j]])
 //     };
 // });
 
 // console.log(filtered_data);
 
+// Bonus notes:
+
+// select all of the things that are possible to filter
+// d3.selectAll(".filter").on("change", inputField) 
+
+// in the handle change :
+// if (inputValue)
+// go through each item in the tabledata and filter by row[inputID]
