@@ -49,7 +49,7 @@ var inputField=d3.selectAll(".filter")
 
 
   // We can use the `on` function in d3 to attach an event to the handler function
-button.on("click", handleChange);
+// button.on("click", handleChange);
 inputField.on("change", handleChange);
 // form.on("submit", handleChange);
 // d3.selectAll(".filter").on("change", inputChange);
