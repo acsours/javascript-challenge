@@ -20,4 +20,4 @@ https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css
 
 #### HTML Preview
 
-![filter_menu.png](static/images/filter_menu.png?raw=true "Title")
+![filter_menu.png](UFO-level-1/static/images/filter_menu.png?raw=true "Title")
