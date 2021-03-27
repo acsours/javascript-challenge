@@ -54,7 +54,7 @@ function handleChange(event) {
     // get value property from the form 
     var inputText = inputElement.property("value");
     // console.log(inputText);    
- 
+    if (inputText) {
     filteredData=tableData.filter(sighting=>sighting.datetime==inputText);
     // console.log(filteredData);
 
@@ -68,4 +68,7 @@ function handleChange(event) {
         new_row.append('td').text(data_point)
       });
     });
+    } else {
+      buildTable(tableData);
+    };
 };  

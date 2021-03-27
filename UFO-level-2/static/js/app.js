@@ -64,16 +64,18 @@ function handleChange(event) {
   // then I want to cycle through the sightings and check if id matches, then filter by the value of that id
   var filteredData=tableData.filter(sighting=>sighting[inputID]===inputText)
     // console.log(filteredData);   
-  }
 
-  filteredData.forEach(record=> {
-    var new_row=tbody.append('tr');
-    value_list=Object.values(record)
-    // console.log("value list");
-    // console.log(value_list);
-    value_list.forEach(data_point => {
-      new_row.append('td').text(data_point)
+    filteredData.forEach(record=> {
+      var new_row=tbody.append('tr');
+      value_list=Object.values(record)
+      // console.log("value list");
+      // console.log(value_list);
+      value_list.forEach(data_point => {
+        new_row.append('td').text(data_point)
+      });
     });
-  });
+  } else {
+    buildTable(tableData);
+  };
 };
 
